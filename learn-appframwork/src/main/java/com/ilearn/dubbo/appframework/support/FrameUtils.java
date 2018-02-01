@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author LiHuan 2015-5-28 上午9:42:36 <br>
+ * @author George 2015-5-28 上午9:42:36 <br>
  *         框架公共方法及常量
  */
 public class FrameUtils {

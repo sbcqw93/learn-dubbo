@@ -9,7 +9,7 @@ import com.ilearn.dubbo.appframework.log.LogUtils;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/2/1 0001.
+ * Created by George on 2018/2/1 0001.
  * 数据访问基础实现类<br>
  *         注：抛异常时不要使用Exception(String message, Throwable cause),否则外面收到的异常会有部分丢失
  *         建议直接使用：throw e;

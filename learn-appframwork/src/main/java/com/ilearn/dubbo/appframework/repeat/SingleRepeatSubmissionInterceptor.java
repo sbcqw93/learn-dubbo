@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.ilearn.dubbo.appframework.support.FrameUtils;
 
 /**
- * @author LiHuan 2016-8-30 下午8:12:21 <br>
+ * @author George 2016-8-30 下午8:12:21 <br>
  *         单实例拦截处理
  */
 public class SingleRepeatSubmissionInterceptor extends RepeatSubmission {

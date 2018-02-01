@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderMapper">
+
+	<resultMap id="orderMap" type="orderType">
+		<result property="id" column="id" />
+		<result property="productId" column="product_id" />
+		<result property="sellerId" column="seller_id" />
+		<result property="buyerId" column="buyer_id" />
+		<result property="orderStatus" column="order_status" />
+	</resultMap>
+
+	<sql id="linkColumn">
+		`id`,
+		`product_id`,
+		`seller_id`,
+		`buyer_id`,
+		`order_status`
+	</sql>
+	
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO `order`
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				id,
+			</if>
+			<if test="productId != null and productId != ''">
+				product_id,
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+				seller_id,
+			</if>
+			<if test="buyerId != null and buyerId != ''">
+				buyer_id,
+			</if>
+			<if test="orderStatus != null and orderStatus != ''">
+				order_status,
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				#{id},
+			</if>
+			<if test="productId != null and productId != ''">
+				#{productId},
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+				#{sellerId},
+			</if>
+			<if test="buyerId != null and buyerId != ''">
+				#{buyerId},
+			</if>
+			<if test="orderStatus != null and orderStatus != ''">
+				#{orderStatus},
+			</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertBatch">
+		INSERT INTO `order`
+		(
+		`id`,
+		`product_id`,
+		`seller_id`,
+		`buyer_id`,
+		`order_status`
+		)
+		VALUES 
+		<foreach item="item" index="index" collection="list" separator=",">
+			(
+			#{item.id},
+			#{item.productId},
+			#{item.sellerId},
+			#{item.buyerId},
+			#{item.orderStatus}
+			)
+		</foreach>
+	</insert>
+
+	<select id="selectOne" resultMap="orderMap" parameterType="java.lang.String">
+		SELECT <include refid="linkColumn" /> FROM `order`
+		WHERE id = #{primaryKey}
+		<!-- <if test="_parameter != null and _parameter != ''"></if> -->
+	</select>
+
+	<select id="select" resultMap="orderMap" parameterType="java.util.Map">
+		SELECT <include refid="linkColumn" /> FROM `order`
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="productId != null and productId != ''">
+			AND `product_id` = #{productId}
+		</if>
+		<if test="sellerId != null and sellerId != ''">
+			AND `seller_id` = #{sellerId}
+		</if>
+		<if test="buyerId != null and buyerId != ''">
+			AND `buyer_id` = #{buyerId}
+		</if>
+		<if test="orderStatus != null and orderStatus != ''">
+			AND `order_status` = #{orderStatus}
+		</if>
+		</where>
+	</select>
+
+	<select id="selectList" resultMap="orderMap" parameterType="java.util.Map">
+		SELECT <include refid="linkColumn" /> FROM `order`
+		LIMIT #{position}, #{offset}
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(1) FROM `order`
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="productId != null and productId != ''">
+			AND `product_id` = #{productId}
+		</if>
+		<if test="sellerId != null and sellerId != ''">
+			AND `seller_id` = #{sellerId}
+		</if>
+		<if test="buyerId != null and buyerId != ''">
+			AND `buyer_id` = #{buyerId}
+		</if>
+		<if test="orderStatus != null and orderStatus != ''">
+			AND `order_status` = #{orderStatus}
+		</if>
+		</where>
+	</select>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM `order` WHERE id = #{primaryKey}
+	</delete>
+	
+	<delete id="deleteBatch">
+		DELETE FROM `order`
+		WHERE
+		id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="update" parameterType="java.util.Map">
+		UPDATE `order` 
+		<set>
+			<if test="productId != null and productId != ''">
+				product_id,
+			</if>
+			<if test="sellerId != null and sellerId != ''">
+				seller_id,
+			</if>
+			<if test="buyerId != null and buyerId != ''">
+				buyer_id,
+			</if>
+			<if test="orderStatus != null and orderStatus != ''">
+				order_status,
+			</if>
+		</set>
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="productId != null and productId != ''">
+			AND `product_id` = #{productId}
+		</if>
+		<if test="sellerId != null and sellerId != ''">
+			AND `seller_id` = #{sellerId}
+		</if>
+		<if test="buyerId != null and buyerId != ''">
+			AND `buyer_id` = #{buyerId}
+		</if>
+		<if test="orderStatus != null and orderStatus != ''">
+			AND `order_status` = #{orderStatus}
+		</if>
+		</where>
+	</update>
+
+</mapper>

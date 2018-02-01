@@ -1,7 +1,7 @@
 package com.ilearn.dubbo.appframework.log;
 
 /**
- * Created by Administrator on 2018/2/1 0001.
+ * Created by George on 2018/2/1 0001.
  */
 public class LogUtils {
 

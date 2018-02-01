@@ -15,7 +15,7 @@ import com.ilearn.dubbo.appframework.cache.CacheService;
 import com.ilearn.dubbo.appframework.support.FrameUtils;
 
 /**
- * @author LiHuan 2016-8-27 上午11:47:47 <br>
+ * @author George 2016-8-27 上午11:47:47 <br>
  *         多实例拦截处理
  */
 public class MultiRepeatSubmissionInterceptor extends RepeatSubmission {

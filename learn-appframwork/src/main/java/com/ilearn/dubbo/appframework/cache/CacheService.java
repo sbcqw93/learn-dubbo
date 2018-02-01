@@ -1,7 +1,7 @@
 package com.ilearn.dubbo.appframework.cache;
 
 /**
- * @author LiHuan 2014-11-12 下午2:54:29 <br>
+ * @author George 2014-11-12 下午2:54:29 <br>
  *         缓存接口
  */
 public interface CacheService {

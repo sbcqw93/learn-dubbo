@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MemberMapper">
+
+	<resultMap id="memberMap" type="memberType">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" />
+	</resultMap>
+
+	<sql id="linkColumn">
+		`id`,
+		`user_name`
+	</sql>
+	
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO `member`
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				id,
+			</if>
+			<if test="userName != null and userName != ''">
+				user_name,
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				#{id},
+			</if>
+			<if test="userName != null and userName != ''">
+				#{userName},
+			</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertBatch">
+		INSERT INTO `member`
+		(
+		`id`,
+		`user_name`
+		)
+		VALUES 
+		<foreach item="item" index="index" collection="list" separator=",">
+			(
+			#{item.id},
+			#{item.userName}
+			)
+		</foreach>
+	</insert>
+
+	<select id="selectOne" resultMap="memberMap" parameterType="java.lang.String">
+		SELECT <include refid="linkColumn" /> FROM `member`
+		WHERE id = #{primaryKey}
+		<!-- <if test="_parameter != null and _parameter != ''"></if> -->
+	</select>
+
+	<select id="select" resultMap="memberMap" parameterType="java.util.Map">
+		SELECT <include refid="linkColumn" /> FROM `member`
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="userName != null and userName != ''">
+			AND `user_name` = #{userName}
+		</if>
+		</where>
+	</select>
+
+	<select id="selectList" resultMap="memberMap" parameterType="java.util.Map">
+		SELECT <include refid="linkColumn" /> FROM `member`
+		LIMIT #{position}, #{offset}
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(1) FROM `member`
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="userName != null and userName != ''">
+			AND `user_name` = #{userName}
+		</if>
+		</where>
+	</select>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM `member` WHERE id = #{primaryKey}
+	</delete>
+	
+	<delete id="deleteBatch">
+		DELETE FROM `member`
+		WHERE
+		id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="update" parameterType="java.util.Map">
+		UPDATE `member` 
+		<set>
+			<if test="userName != null and userName != ''">
+				user_name,
+			</if>
+		</set>
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="userName != null and userName != ''">
+			AND `user_name` = #{userName}
+		</if>
+		</where>
+	</update>
+
+</mapper>

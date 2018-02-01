@@ -3,7 +3,7 @@ package com.ilearn.dubbo.appframework.dao;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/2/1 0001.
+ * Created by George on 2018/2/1 0001.
  * 数据访问基础接口
  */
 public interface BaseDao {

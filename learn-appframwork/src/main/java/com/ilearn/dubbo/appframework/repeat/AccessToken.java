@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 
 /**
- * @author LiHuan 2016-8-24 上午9:05:28 <br>
+ * @author George 2016-8-24 上午9:05:28 <br>
  *         生成Token
  */
 public final class AccessToken {

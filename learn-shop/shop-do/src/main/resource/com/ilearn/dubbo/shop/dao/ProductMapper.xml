@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ProductMapper">
+
+	<resultMap id="productMap" type="productType">
+		<result property="id" column="id" />
+		<result property="shopId" column="shop_id" />
+		<result property="productName" column="product_name" />
+		<result property="price" column="price" />
+		<result property="stock" column="stock" />
+	</resultMap>
+
+	<sql id="linkColumn">
+		`id`,
+		`shop_id`,
+		`product_name`,
+		`price`,
+		`stock`
+	</sql>
+	
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO `product`
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				id,
+			</if>
+			<if test="shopId != null and shopId != ''">
+				shop_id,
+			</if>
+			<if test="productName != null and productName != ''">
+				product_name,
+			</if>
+			<if test="price != null and price != ''">
+				price,
+			</if>
+			<if test="stock != null and stock != ''">
+				stock,
+			</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="id != null and id != ''">
+				#{id},
+			</if>
+			<if test="shopId != null and shopId != ''">
+				#{shopId},
+			</if>
+			<if test="productName != null and productName != ''">
+				#{productName},
+			</if>
+			<if test="price != null and price != ''">
+				#{price},
+			</if>
+			<if test="stock != null and stock != ''">
+				#{stock},
+			</if>
+		</trim>
+	</insert>
+	
+	<insert id="insertBatch">
+		INSERT INTO `product`
+		(
+		`id`,
+		`shop_id`,
+		`product_name`,
+		`price`,
+		`stock`
+		)
+		VALUES 
+		<foreach item="item" index="index" collection="list" separator=",">
+			(
+			#{item.id},
+			#{item.shopId},
+			#{item.productName},
+			#{item.price},
+			#{item.stock}
+			)
+		</foreach>
+	</insert>
+
+	<select id="selectOne" resultMap="productMap" parameterType="java.lang.String">
+		SELECT <include refid="linkColumn" /> FROM `product`
+		WHERE id = #{primaryKey}
+		<!-- <if test="_parameter != null and _parameter != ''"></if> -->
+	</select>
+
+	<select id="select" resultMap="productMap" parameterType="java.util.Map">
+		SELECT <include refid="linkColumn" /> FROM `product`
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			AND `shop_id` = #{shopId}
+		</if>
+		<if test="productName != null and productName != ''">
+			AND `product_name` = #{productName}
+		</if>
+		<if test="price != null and price != ''">
+			AND `price` = #{price}
+		</if>
+		<if test="stock != null and stock != ''">
+			AND `stock` = #{stock}
+		</if>
+		</where>
+	</select>
+
+	<select id="selectList" resultMap="productMap" parameterType="java.util.Map">
+		SELECT <include refid="linkColumn" /> FROM `product`
+		LIMIT #{position}, #{offset}
+	</select>
+
+	<select id="selectCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(1) FROM `product`
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			AND `shop_id` = #{shopId}
+		</if>
+		<if test="productName != null and productName != ''">
+			AND `product_name` = #{productName}
+		</if>
+		<if test="price != null and price != ''">
+			AND `price` = #{price}
+		</if>
+		<if test="stock != null and stock != ''">
+			AND `stock` = #{stock}
+		</if>
+		</where>
+	</select>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM `product` WHERE id = #{primaryKey}
+	</delete>
+	
+	<delete id="deleteBatch">
+		DELETE FROM `product`
+		WHERE
+		id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="update" parameterType="java.util.Map">
+		UPDATE `product` 
+		<set>
+			<if test="shopId != null and shopId != ''">
+				shop_id,
+			</if>
+			<if test="productName != null and productName != ''">
+				product_name,
+			</if>
+			<if test="price != null and price != ''">
+				price,
+			</if>
+			<if test="stock != null and stock != ''">
+				stock,
+			</if>
+		</set>
+		<where>
+		<if test="id != null and id != ''">
+			AND `id` = #{id}
+		</if>
+		<if test="shopId != null and shopId != ''">
+			AND `shop_id` = #{shopId}
+		</if>
+		<if test="productName != null and productName != ''">
+			AND `product_name` = #{productName}
+		</if>
+		<if test="price != null and price != ''">
+			AND `price` = #{price}
+		</if>
+		<if test="stock != null and stock != ''">
+			AND `stock` = #{stock}
+		</if>
+		</where>
+	</update>
+
+</mapper>

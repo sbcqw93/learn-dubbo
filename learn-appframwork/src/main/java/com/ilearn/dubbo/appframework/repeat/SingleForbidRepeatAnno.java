@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 单实例
  * 
- * @author Thomas 2016-8-30 下午8:09:36 <br>
+ * @author George 2016-8-30 下午8:09:36 <br>
  *         禁止重复提交注解<br>
  *         用于多实例服务，主要区别:<br>
  *         1、单实例，取sessionKey时将从HttpSession中取，请参考{@link SingleForbidRepeatAnno}<br>

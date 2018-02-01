@@ -1,7 +1,7 @@
 package com.ilearn.dubbo.appframework.repeat;
 
 /**
- * @author LiHuan 2016-8-31 上午9:36:55 <br>
+ * @author George 2016-8-31 上午9:36:55 <br>
  *         重复提交基类
  */
 public abstract class RepeatSubmission {
