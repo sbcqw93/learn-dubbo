@@ -1,6 +1,7 @@
 package com.ilearn.dubbo.order.data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 /**
@@ -23,18 +24,21 @@ public class Order implements Serializable {
 	private int sellerId;
 	/** 买家ID */
 	private int buyerId;
-	/** 交易状态：10成功,20退款,30失败 */
+	/** 订单金额 */
+	private BigDecimal price;
+	/** 交易状态：10成功,20退款,30失败,40待款*/
 	private int orderStatus;
 
 	public Order() {
 		super();
 	}
 
-	public Order(int id, int productId, int sellerId, int buyerId, int orderStatus) {
+	public Order(int id, int productId, int sellerId, int buyerId, int orderStatus, BigDecimal price) {
 		this.id = id;
 		this.productId = productId;
 		this.sellerId = sellerId;
 		this.buyerId = buyerId;
+		this.price = price;
 		this.orderStatus = orderStatus;
 	}
 
@@ -78,9 +82,23 @@ public class Order implements Serializable {
 		this.orderStatus = orderStatus;
 	}
 
-	@Override
-	public String toString() {
-		return "Order [id = " + id + ", productId = " + productId + ", sellerId = " + sellerId + ", buyerId = " + buyerId + ", orderStatus = " + orderStatus + "]";
+	public BigDecimal getPrice() {
+		return price;
 	}
 
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", productId=" + productId +
+				", sellerId=" + sellerId +
+				", buyerId=" + buyerId +
+				", price=" + price +
+				", orderStatus=" + orderStatus +
+				'}';
+	}
 }

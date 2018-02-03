@@ -1,4 +1,4 @@
-package com.ilearn.dubbo.appframework.impl;
+package com.ilearn.dubbo.appframework.dao.impl;
 
 import com.ilearn.dubbo.appframework.dao.BaseDao;
 import org.mybatis.spring.support.SqlSessionDaoSupport;

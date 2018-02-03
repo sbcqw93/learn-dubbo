@@ -118,4 +118,18 @@ public class FrameUtils {
 		}
 		return requestValue;
 	}
+	/**
+	 *
+	 * 判断传入参数是否为数字且大于0.<br>
+	 *
+	 * @param integer
+	 *            数字
+	 * @return true:是,false:否
+	 */
+	public static boolean isIntegerAndGt0(Integer integer) {
+		if (null == integer || integer <= 0) {
+			return false;
+		}
+		return true;
+	}
 }

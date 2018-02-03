@@ -1,7 +1,7 @@
-CREATE SCHEMA `learn_shop` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-CREATE SCHEMA `learn_order` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-CREATE SCHEMA `learn_member` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-CREATE SCHEMA `learn_payment` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE SCHEMA IF NOT EXISTS `learn_shop` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE SCHEMA IF NOT EXISTS `learn_order` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE SCHEMA IF NOT EXISTS `learn_member` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE SCHEMA IF NOT EXISTS `learn_payment` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
 USE `learn_shop`;
 
@@ -31,7 +31,8 @@ CREATE TABLE `order` (
   `product_id` INT(11) DEFAULT 0 NOT NULL COMMENT '产品ID',
   `seller_id` int(11) DEFAULT 0 NOT NULL COMMENT '卖家ID',
   `buyer_id` int(11) DEFAULT 0 NOT NULL COMMENT '买家ID',
-  `order_status` int(11) DEFAULT '10' COMMENT '交易状态：10成功,20退款,30失败',
+  `price` decimal(20,2) DEFAULT '0.00' COMMENT '订单金额',
+  `order_status` int(11) DEFAULT '40' COMMENT '交易状态：10成功,20退款,30失败,40待款',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin KEY_BLOCK_SIZE=16 AUTO_INCREMENT=1;
 
@@ -41,6 +42,7 @@ DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) DEFAULT '' COMMENT '用户名',
+  `rank` float(6,2) DEFAULT 0.00 COMMENT '等级',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin KEY_BLOCK_SIZE=16 AUTO_INCREMENT=1;
 
@@ -50,7 +52,7 @@ DROP TABLE IF EXISTS `pay_fund`;
 CREATE TABLE `pay_fund` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_id` int(11) DEFAULT 0 NOT NULL COMMENT '会员ID',
-  `balance` decimal(20,2) DEFAULT '0.00' COMMENT '手机号',
+  `balance` decimal(20,2) DEFAULT '0.00' COMMENT '可用金额',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin KEY_BLOCK_SIZE=16 AUTO_INCREMENT=1;
 

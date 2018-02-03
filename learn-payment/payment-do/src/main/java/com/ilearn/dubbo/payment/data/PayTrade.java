@@ -5,14 +5,14 @@ import java.math.BigDecimal;
 
 
 /**
- * 
+ *
  * @author George 2018-02-01 обнГ 08:25:02
- * 
+ *
  */
 public class PayTrade implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

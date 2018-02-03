@@ -17,6 +17,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <build>
+        <finalName>${project.artifactId}</finalName>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

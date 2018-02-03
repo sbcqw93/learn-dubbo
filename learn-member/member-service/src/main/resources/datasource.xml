@@ -1,0 +1,114 @@
+<?xml version= "1.0"  encoding= "UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx   
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd   
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/jdbc   
+    http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+
+    <bean id="encryptDataSourceFactory" class="com.ilearn.dubbo.appframework.base64.EncryptDataSourceFactory">
+        <property name="properties">
+            <props>
+                <prop key="user">${datasource.username}</prop>
+                <prop key="password">${datasource.password}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 配置数据源，连接池使用c3p0 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass">
+            <value>${datasource.driverClassName}</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${datasource.url}</value>
+        </property>
+        <!--
+        <property name="user">
+            <value>${datasource.username}</value>
+        </property>
+        <property name="password">
+            <value>${datasource.password}</value>
+        </property>
+         -->
+        <property name="properties" ref="encryptDataSourceFactory"/>
+        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数,默认值为 3 -->
+        <property name="acquireIncrement">
+            <value>${c3p0.acquireIncrement}</value>
+        </property>
+        <!-- 初始化时获取连接数,默认值为 3 -->
+        <property name="initialPoolSize">
+            <value>${c3p0.initialPoolSize}</value>
+        </property>
+        <!-- 连接池中保留的最小连接数 -->
+        <property name="minPoolSize">
+            <value>${c3p0.minPoolSize}</value>
+        </property>
+        <!-- -连接池中保留的最大连接数。默认值为 15 -->
+        <property name="maxPoolSize">
+            <value>${c3p0.maxPoolSize}</value>
+        </property>
+        <!-- 连接最大空闲时间,单位为秒。若为0则永不丢弃。默认值为 0 -->
+        <property name="maxIdleTime">
+            <value>${c3p0.maxIdleTime}</value>
+        </property>
+        <!-- 检查所有连接池中的空闲连接的时间间隔，单位是秒。默认值为 0 -->
+        <property name="idleConnectionTestPeriod">
+            <value>${c3p0.idleConnectionTestPeriod}</value>
+        </property>
+        <!-- JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。 -->
+        <property name="maxStatements">
+            <value>${c3p0.maxStatements}</value>
+        </property>
+        <!-- -c3p0支持的线程数,c3p0是异步操作的，通过多线程实现多个操作同时被执行。默认值为 3- -->
+        <property name="numHelperThreads">
+            <value>${c3p0.numHelperThreads}</value>
+        </property>
+    </bean>
+
+    <!-- 配置mybatis的sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation">
+            <value>classpath:sql-map-config.xml</value>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 配置事务管理器bean -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource">
+            <ref local="dataSource"/>
+        </property>
+    </bean>
+
+    <!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+    <!-- 事务通知操作，使用的事务管理器引用自transactionManager -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="set*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="operation*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="select*" propagation="NOT_SUPPORTED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 定义AOP配置 -->
+    <aop:config>
+        <!-- 定义一个切入点 -->
+        <aop:pointcut expression="execution (* com.ilearn.dubbo.member.service.impl.*.*(..))"
+                      id="aopServices"/>
+        <!-- 对切入点和事务的通知，进行适配 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="aopServices"/>
+    </aop:config>
+
+</beans>

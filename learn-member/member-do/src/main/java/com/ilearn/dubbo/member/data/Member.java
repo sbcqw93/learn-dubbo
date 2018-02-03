@@ -4,50 +4,67 @@ import java.io.Serializable;
 
 
 /**
- * 
- * @author George 2018-02-01 ÏÂÎç 08:23:13
- * 
+ * @author George 2018-02-01 08:23:13
  */
 public class Member implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**  */
-	private int id;
-	/** ÓÃ»§Ãû */
-	private String userName;
+    /**  */
+    private int id;
+    /**
+     * ç”¨æˆ·å
+     */
+    private String userName;
 
-	public Member() {
-		super();
-	}
+    /**
+     * ç­‰çº§
+     */
+    private float rank;
 
-	public Member(int id, String userName) {
-		this.id = id;
-		this.userName = userName;
-	}
+    public Member() {
+        super();
+    }
 
-	public int getId() {
-		return id;
-	}
+    public Member(int id, String userName, float rank) {
+        this.id = id;
+        this.userName = userName;
+        this.rank = rank;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+    public String getUserName() {
+        return userName;
+    }
 
-	@Override
-	public String toString() {
-		return "Member [id = " + id + ", userName = " + userName + "]";
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
+    public float getRank() {
+        return rank;
+    }
+
+    public void setRank(float rank) {
+        this.rank = rank;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", rank=" + rank +
+                '}';
+    }
 }
