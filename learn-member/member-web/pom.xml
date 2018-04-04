@@ -10,7 +10,7 @@
     <artifactId>member-web</artifactId>
     <packaging>war</packaging>
 
-    <name>member-web Maven Webapp</name>
+    <name>member-web</name>
     <url>http://maven.apache.org</url>
 
     <build>
