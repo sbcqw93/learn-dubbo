@@ -13,6 +13,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+        <uploadVersion />
+
+        <com.csc.release>release</com.csc.release>
+        <com.csc.release.url>http://192.168.0.100:8081/artifactory/simple/ext-release-local</com.csc.release.url>
+        <com.csc.snapshot>snapshot</com.csc.snapshot>
+        <com.csc.snapshot.url>http://192.168.0.100:8081/artifactory/simple/ext-snapshot-local</com.csc.snapshot.url>
+
         <jar.javax.servlet>3.1.0</jar.javax.servlet>
         <jar.spring>3.2.8.RELEASE</jar.spring>
         <jar.mybatis>3.1.1</jar.mybatis>

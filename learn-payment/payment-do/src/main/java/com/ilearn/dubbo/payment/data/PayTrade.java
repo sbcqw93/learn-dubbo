@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author George 2018-02-01 ÏÂÎç 08:25:02
+ * @author George 2018-02-01 ä¸‹åˆ 08:25:02
  *
  */
 public class PayTrade implements Serializable {
@@ -18,11 +18,11 @@ public class PayTrade implements Serializable {
 
 	/**  */
 	private int id;
-	/** ¶©µ¥ID */
+	/** è®¢å•ID */
 	private int orderId;
-	/** ½»Ò×½ğ¶î */
+	/** äº¤æ˜“é‡‘é¢ */
 	private BigDecimal tradeAmount;
-	/** ½»Ò××´Ì¬£º10³É¹¦,20ÍË¿î,30Ê§°Ü */
+	/** äº¤æ˜“çŠ¶æ€ï¼š10æˆåŠŸ,20é€€æ¬¾,30å¤±è´¥ */
 	private int tradeStatus;
 
 	public PayTrade() {

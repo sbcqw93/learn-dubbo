@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 /**
  * 
- * @author George 2018-02-01 ÏÂÎç 08:25:02
+ * @author George 2018-02-01 ä¸‹åˆ 08:25:02
  * 
  */
 public class PayFund implements Serializable {
@@ -18,9 +18,9 @@ public class PayFund implements Serializable {
 
 	/**  */
 	private int id;
-	/** »áÔ±ID */
+	/** ä¼šå‘˜ID */
 	private int memberId;
-	/** ÊÖ»úºÅ */
+	/** æ‰‹æœºå· */
 	private BigDecimal balance;
 
 	public PayFund() {
