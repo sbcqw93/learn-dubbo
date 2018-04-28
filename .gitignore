@@ -1,6 +1,10 @@
 target/
 .idea/
-
+*.epoch
+*.lck
+.settings
+.project
+.classpath
 *.iml
 
 # Compiled class file

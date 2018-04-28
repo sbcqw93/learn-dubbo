@@ -15,4 +15,7 @@
 		`shop_name`
 	</sql>
 
+	<select id="selectShopById" resultMap="shopMap" parameterType="int">
+		SELECT <include refid="linkColumn" /> FROM `shop` WHERE id = #{shopId}
+	</select>
 </mapper>

@@ -33,8 +33,7 @@ public class Order implements Serializable {
 		super();
 	}
 
-	public Order(int id, int productId, int sellerId, int buyerId, int orderStatus, BigDecimal price) {
-		this.id = id;
+	public Order(int productId, int sellerId, int buyerId, int orderStatus, BigDecimal price) {
 		this.productId = productId;
 		this.sellerId = sellerId;
 		this.buyerId = buyerId;

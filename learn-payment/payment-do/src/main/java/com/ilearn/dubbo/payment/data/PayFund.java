@@ -27,8 +27,7 @@ public class PayFund implements Serializable {
 		super();
 	}
 
-	public PayFund(int id, int memberId, BigDecimal balance) {
-		this.id = id;
+	public PayFund(int memberId, BigDecimal balance) {
 		this.memberId = memberId;
 		this.balance = balance;
 	}

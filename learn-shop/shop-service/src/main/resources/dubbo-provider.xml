@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:duboo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <duboo:application name="shop-service-provider"/>
+
+    <duboo:registry address="zookeeper://192.168.0.242:2181" timeout="3000"/>
+
+    <duboo:protocol accesslog="true" name="dubbo" port="9001"/>
+
+    <duboo:service interface="com.ilearn.dubbo.shop.service.ext.ShopExtService" ref="shopService"/>
+    <duboo:service interface="com.ilearn.dubbo.shop.service.ext.ProductExtService" ref="productService"/>
+
+</beans>

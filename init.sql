@@ -32,7 +32,7 @@ CREATE TABLE `order` (
   `seller_id` int(11) DEFAULT 0 NOT NULL COMMENT '卖家ID',
   `buyer_id` int(11) DEFAULT 0 NOT NULL COMMENT '买家ID',
   `price` decimal(20,2) DEFAULT '0.00' COMMENT '订单金额',
-  `order_status` int(11) DEFAULT '40' COMMENT '交易状态：10成功,20退款,30失败,40待款',
+  `order_status` int(11) DEFAULT '40' COMMENT '交易状态：10成功,20退款,30失败,40待付款',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin KEY_BLOCK_SIZE=16 AUTO_INCREMENT=1;
 

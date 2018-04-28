@@ -26,8 +26,7 @@ public class Shop implements Serializable {
 		super();
 	}
 
-	public Shop(int id, int memberId, String shopName) {
-		this.id = id;
+	public Shop(int memberId, String shopName) {
 		this.memberId = memberId;
 		this.shopName = shopName;
 	}

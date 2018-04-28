@@ -29,8 +29,7 @@ public class PayTrade implements Serializable {
 		super();
 	}
 
-	public PayTrade(int id, int orderId, BigDecimal tradeAmount, int tradeStatus) {
-		this.id = id;
+	public PayTrade(int orderId, BigDecimal tradeAmount, int tradeStatus) {
 		this.orderId = orderId;
 		this.tradeAmount = tradeAmount;
 		this.tradeStatus = tradeStatus;

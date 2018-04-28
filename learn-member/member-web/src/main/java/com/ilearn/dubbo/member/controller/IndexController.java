@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class IndexController extends BaseController {
 
-    @RequestMapping(value = "index.do")
+    @RequestMapping(value = "index")
     public String index(HttpServletRequest request, HttpServletResponse response) {
         return "index";
     }
 
     @ResponseBody
-    @RequestMapping(value = "a.do")
+    @RequestMapping(value = "a")
     public String a(HttpServletRequest request, HttpServletResponse response) {
         return "index";
     }

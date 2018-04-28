@@ -7,4 +7,9 @@
     <bean id="baseDao" class="com.ilearn.dubbo.appframework.dao.impl.BaseDaoImpl"
           p:sqlSessionFactory-ref="sqlSessionFactory"/>
 
+    <bean id="baseOrderDao" class="com.ilearn.dubbo.appframework.dao.impl.BaseDaoImpl"
+          p:sqlSessionFactory-ref="sqlSessionOrderFactory"/>
+
+    <bean id="baseShopDao" class="com.ilearn.dubbo.appframework.dao.impl.BaseDaoImpl"
+          p:sqlSessionFactory-ref="sqlSessionShopFactory"/>
 </beans>

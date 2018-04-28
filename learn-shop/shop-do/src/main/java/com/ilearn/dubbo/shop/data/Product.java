@@ -31,8 +31,7 @@ public class Product implements Serializable {
 		super();
 	}
 
-	public Product(int id, int shopId, String productName, BigDecimal price, int stock) {
-		this.id = id;
+	public Product(int shopId, String productName, BigDecimal price, int stock) {
 		this.shopId = shopId;
 		this.productName = productName;
 		this.price = price;
