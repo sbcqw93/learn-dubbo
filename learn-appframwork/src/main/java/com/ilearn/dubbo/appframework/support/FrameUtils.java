@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +17,8 @@ import java.util.regex.Pattern;
  *         框架公共方法及常量
  */
 public class FrameUtils {
+
+	private static final char[] charsArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
 	/** 外部调用时,请使用localIp,而不是直接调用 getLocalIp()方法 */
 	public final static String localIp = getLocalIp();
@@ -131,5 +134,21 @@ public class FrameUtils {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 生成指定长度的随机字符串
+	 *
+	 * @param randomStrLen 长度
+	 * @return
+	 */
+
+	public static String getRandomStrLen(int randomStrLen) {
+		StringBuffer buffer = new StringBuffer();
+		Random random = new Random();
+		for (int i = 0; i < randomStrLen; i++) {
+			buffer.append(charsArray[random.nextInt(charsArray.length)]);
+		}
+		return buffer.toString();
 	}
 }

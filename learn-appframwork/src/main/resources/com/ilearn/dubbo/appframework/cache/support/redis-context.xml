@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${jedis.pool.config.maxIdle}" />
+		<property name="maxTotal" value="${jedis.pool.config.maxTotal}" />
+		<property name="maxWaitMillis" value="${jedis.pool.config.maxWaitMillis}" />
+		<property name="testOnBorrow" value="${jedis.pool.config.testOnBorrow}" />
+	</bean>
+
+	<bean id="jedisReadConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		destroy-method="destroy">
+		<property name="poolConfig" ref="jedisPoolConfig" />
+		<property name="hostName" value="${redis.read.host}" />
+		<property name="port" value="${redis.read.port}" />
+		<property name="password" value="${redis.read.password}" />
+		<property name="timeout" value="${redis.read.timeout}" />
+	</bean>
+
+	<bean id="redisReadTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisReadConnectionFactory" />
+
+	<bean id="jedisWriteConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		destroy-method="destroy">
+		<property name="poolConfig" ref="jedisPoolConfig" />
+		<property name="hostName" value="${redis.write.host}" />
+		<property name="port" value="${redis.write.port}" />
+		<property name="password" value="${redis.write.password}" />
+		<property name="timeout" value="${redis.write.timeout}" />
+	</bean>
+
+	<bean id="redisWriteTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisWriteConnectionFactory" />
+
+	<bean id="redisClientReadBean" class="com.ilearn.dubbo.appframework.cache.instance.RedisClientBean"
+		  p:redisTemplate-ref="redisReadTemplate" />
+
+	<bean id="redisClientWriteBean" class="com.ilearn.dubbo.appframework.cache.instance.RedisClientBean"
+		  p:redisTemplate-ref="redisWriteTemplate" />
+</beans>
